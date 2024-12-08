@@ -1,6 +1,8 @@
+@forward "./fonts";
 #root {
   background-color: rgb(35, 34, 34);
   height: 100vh;
+  position: relative;
   .imageContainer {
     display: flex;
     flex: 1;
@@ -9,6 +11,36 @@
       height: 100vh;
       width: 100vw;
       object-fit: cover;
+    }
+  }
+  .footerContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin-left: 5%;
+    margin-bottom: 7%;
+    width: 90%;
+
+    font-family: "Roboto";
+    color: #e1dcdc;
+    flex-wrap: wrap;
+    .title {
+      font-size: 2rem;
+      font-weight: 400;
+
+      margin-bottom: 20px;
+    }
+    .subtitle {
+      font-size: 3rem;
+      @media screen and (max-width: 600px) {
+        font-size: 2.5rem;
+      }
+      font-weight: 600;
+
+      margin-bottom: 40px;
+    }
+    .date {
+      font-size: 1.5rem;
     }
   }
 }
