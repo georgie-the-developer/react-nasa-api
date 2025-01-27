@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import config from "./config.json";
 export default function App() {
+  // apod data state for dynamicity
   const [apodData, setApodData] = useState({
     alt: "if you see this, something went wrong",
     projectName: "APOD",
@@ -12,12 +13,14 @@ export default function App() {
     title: "",
     description: "",
   });
+  // fetch data from url
   const fetchApodData = async () => {
     let url = config.API_URL;
     let response = await fetch(url);
     let data = await response.json();
     return data;
   };
+  // get data either from url or sessionStorage cache
   const getApodData = async () => {
     try {
       let data;
@@ -38,6 +41,7 @@ export default function App() {
       console.log(e);
     }
   };
+  // cache data
   const cacheApodData = (data) => {
     const now = new Date().getTime();
     let startOfDay = now - (now % 86400000);
@@ -45,6 +49,7 @@ export default function App() {
     sessionStorage.setItem("savedApodData", JSON.stringify(data));
     sessionStorage.setItem("savedApodDataExpiry", endDate);
   };
+  // assign retrieved data to the apodData state
   useState(async () => {
     let data = await getApodData();
     setApodData((prevValues) => ({
