@@ -2,6 +2,7 @@ import { useState } from "react";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
+import Loading from "./components/Loading";
 import config from "./config.json";
 export default function App() {
   // apod data state for dynamicity
@@ -13,6 +14,7 @@ export default function App() {
     title: "",
     description: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
   // fetch data from url
   const fetchApodData = async () => {
     let url = config.API_URL;
@@ -51,6 +53,7 @@ export default function App() {
   };
   // assign retrieved data to the apodData state
   useState(async () => {
+    setIsLoading(true);
     let data = await getApodData();
     setApodData((prevValues) => ({
       ...prevValues,
@@ -59,6 +62,7 @@ export default function App() {
       title: data.title,
       description: data.explanation,
     }));
+    setIsLoading(false);
   }, []);
   // Sidebar opener/closer
   const [sidebarHidden, setSidebarHidden] = useState("hidden");
@@ -70,20 +74,26 @@ export default function App() {
   };
   return (
     <>
-      <Main img={apodData.img} alt={apodData.alt} />
-      <Sidebar
-        title={apodData.title}
-        date={apodData.date}
-        description={apodData.description}
-        sidebarHidden={sidebarHidden}
-        closeSidebar={closeSidebar}
-      />
-      <Footer
-        title={apodData.projectName}
-        subtitle={apodData.title}
-        date={apodData.date}
-        openSidebar={openSidebar}
-      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Main img={apodData.img} alt={apodData.alt} />
+          <Sidebar
+            title={apodData.title}
+            date={apodData.date}
+            description={apodData.description}
+            sidebarHidden={sidebarHidden}
+            closeSidebar={closeSidebar}
+          />
+          <Footer
+            title={apodData.projectName}
+            subtitle={apodData.title}
+            date={apodData.date}
+            openSidebar={openSidebar}
+          />
+        </>
+      )}
     </>
   );
 }

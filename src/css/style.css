@@ -158,4 +158,35 @@
 #root .footerContainer .iconContainer svg {
   max-width: 30px;
   fill: #ffffff;
+}
+#root .loadingContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+}
+#root .loadingContainer .loadingIconContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#root .loadingContainer .loadingIconContainer svg {
+  fill: #fff;
+  max-width: 40px;
+  animation-name: spin;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }/*# sourceMappingURL=style.css.map */
