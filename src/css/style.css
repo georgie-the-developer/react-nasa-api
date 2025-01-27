@@ -15,6 +15,113 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
+#root .sidebarContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transition: opacity 0.5s ease;
+  z-index: 99;
+  opacity: 1;
+}
+#root .sidebarContainer.hidden {
+  transition: opacity 0.5s ease, z-index 0s ease 0.5s;
+  opacity: 0;
+  z-index: 0;
+}
+#root .sidebarContainer .sidebarOverflow {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.5;
+  transition: opacity 0.5s ease;
+}
+#root .sidebarContainer .sidebarContentsContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 800px;
+  background-color: #242424;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+@media screen and (max-width: 1200px) {
+  #root .sidebarContainer .sidebarContentsContainer {
+    width: 600px;
+  }
+}
+@media screen and (max-width: 600px) {
+  #root .sidebarContainer .sidebarContentsContainer {
+    width: 100%;
+  }
+}
+#root .sidebarContainer .sidebarContentsContainer.hidden {
+  right: -800px;
+}
+#root .sidebarContainer .sidebarContentsContainer .sidebarContents {
+  padding: 2% 4%;
+  height: 100%;
+  color: #e1dcdc;
+  font-family: "Roboto";
+}
+#root .sidebarContainer .sidebarContentsContainer .sidebarContents .head {
+  height: 20%;
+}
+#root .sidebarContainer .sidebarContentsContainer .sidebarContents .head .title {
+  font-size: 2rem;
+  margin-bottom: 5%;
+}
+@media screen and (max-width: 600px) {
+  #root .sidebarContainer .sidebarContentsContainer .sidebarContents .head .title {
+    font-size: 1.5em;
+  }
+}
+#root .sidebarContainer .sidebarContentsContainer .sidebarContents .head .date {
+  font-size: 1.5rem;
+  margin-bottom: 5%;
+}
+@media screen and (max-width: 600px) {
+  #root .sidebarContainer .sidebarContentsContainer .sidebarContents .head .date {
+    font-size: 1em;
+  }
+}
+#root .sidebarContainer .sidebarContentsContainer .sidebarContents .main {
+  height: 80%;
+}
+#root .sidebarContainer .sidebarContentsContainer .sidebarContents .main .description {
+  font-size: 1.2rem;
+  height: 80%;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+@media screen and (max-width: 600px) {
+  #root .sidebarContainer .sidebarContentsContainer .sidebarContents .main .description {
+    font-size: 1em;
+  }
+}
+#root .sidebarContainer .sidebarContentsContainer .sidebarContents .main .description::-webkit-scrollbar {
+  display: none;
+}
+#root .sidebarContainer .sidebarContentsContainer .sidebarContents .main .iconContainer {
+  position: fixed;
+  bottom: 5%;
+  left: 5%;
+}
+#root .sidebarContainer .sidebarContentsContainer .sidebarContents .main .iconContainer .backIcon {
+  font-size: 2rem;
+}
+@media screen and (max-width: 600px) {
+  #root .sidebarContainer .sidebarContentsContainer .sidebarContents .main .iconContainer .backIcon {
+    font-size: 1.5em;
+  }
+}
 #root .footerContainer {
   position: fixed;
   bottom: 0;
@@ -43,4 +150,12 @@
 }
 #root .footerContainer .date {
   font-size: 1.5rem;
+}
+#root .footerContainer .iconContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+#root .footerContainer .iconContainer svg {
+  max-width: 30px;
+  fill: #ffffff;
 }/*# sourceMappingURL=style.css.map */

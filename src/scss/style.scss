@@ -13,6 +13,122 @@
       object-fit: cover;
     }
   }
+  .sidebarContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transition: opacity 0.5s ease;
+    z-index: 99;
+    opacity: 1;
+
+    &.hidden {
+      transition: opacity 0.5s ease, z-index 0s ease 0.5s;
+      opacity: 0;
+      z-index: 0;
+    }
+
+    .sidebarOverflow {
+      position: fixed;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000000;
+      opacity: 0.5;
+      transition: opacity 0.5s ease;
+    }
+
+    .sidebarContentsContainer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 800px;
+      background-color: #242424;
+      transition: all 0.5s ease;
+      overflow: hidden;
+
+      @media screen and (max-width: 1200px) {
+        width: 600px;
+      }
+
+      @media screen and (max-width: 600px) {
+        width: 100%;
+      }
+
+      &.hidden {
+        right: -800px;
+      }
+
+      .sidebarContents {
+        padding: 2% 4%;
+        height: 100%;
+        color: #e1dcdc;
+        font-family: "Roboto";
+
+        .head {
+          height: 20%;
+
+          .title {
+            font-size: 2rem;
+
+            @media screen and (max-width: 600px) {
+              font-size: 1.5em;
+            }
+            margin-bottom: 5%;
+          }
+
+          .date {
+            font-size: 1.5rem;
+
+            @media screen and (max-width: 600px) {
+              font-size: 1em;
+            }
+            margin-bottom: 5%;
+          }
+        }
+
+        .main {
+          height: 80%;
+
+          .description {
+            font-size: 1.2rem;
+
+            @media screen and (max-width: 600px) {
+              font-size: 1em;
+            }
+            height: 80%;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+              display: none;
+            }
+
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+
+          .iconContainer {
+            position: fixed;
+            bottom: 5%;
+            left: 5%;
+
+            .backIcon {
+              font-size: 2rem;
+
+              @media screen and (max-width: 600px) {
+                font-size: 1.5em;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   .footerContainer {
     position: fixed;
     bottom: 0;
@@ -41,6 +157,14 @@
     }
     .date {
       font-size: 1.5rem;
+    }
+    .iconContainer {
+      display: flex;
+      justify-content: flex-end;
+      svg {
+        max-width: 30px;
+        fill: #ffffff;
+      }
     }
   }
 }
