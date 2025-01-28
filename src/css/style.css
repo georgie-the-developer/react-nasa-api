@@ -96,6 +96,7 @@
 }
 #root .sidebarContainer .sidebarContentsContainer .sidebarContents .main .description {
   font-size: 1.2rem;
+  line-height: 24px;
   height: 80%;
   overflow-y: scroll;
   -ms-overflow-style: none;
