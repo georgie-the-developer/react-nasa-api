@@ -26,12 +26,14 @@ export default function App() {
   const getApodData = async () => {
     try {
       let data;
-      let cachedData = sessionStorage.getItem("savedApodData");
+      let cachedData =
+        JSON.parse(sessionStorage.getItem("savedApodData")) ?? false;
       let cacheExpiry =
         JSON.parse(sessionStorage.getItem("savedApodDataExpiry")) ?? 0;
       let cacheExpired = Date.now() > cacheExpiry;
+      console.log(Date.now(), cacheExpiry);
       if (cachedData && !cacheExpired) {
-        data = JSON.parse(cachedData);
+        data = cachedData;
         console.log("Using cached data");
       } else {
         data = await fetchApodData();
@@ -45,12 +47,19 @@ export default function App() {
   };
   // cache data
   const cacheApodData = (data) => {
-    const now = new Date().getTime();
-    let startOfDay = now - (now % 86400000);
-    let endDate = startOfDay + 86400000;
+    const expiryDate = getNextDayStartUTCTimestamp();
     sessionStorage.setItem("savedApodData", JSON.stringify(data));
-    sessionStorage.setItem("savedApodDataExpiry", endDate);
+    sessionStorage.setItem("savedApodDataExpiry", expiryDate);
   };
+  // get the next day date
+  function getNextDayStartUTCTimestamp() {
+    const now = new Date();
+    const nextDay = new Date(
+      Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1)
+    );
+    return nextDay.getTime();
+  }
+
   // assign retrieved data to the apodData state
   useState(async () => {
     setIsLoading(true);
