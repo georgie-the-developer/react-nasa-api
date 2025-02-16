@@ -5,6 +5,7 @@
   position: relative;
 }
 #root .imageContainer {
+  z-index: 1;
   display: flex;
   flex: 1;
   color: #ffffff;
@@ -29,7 +30,7 @@
 #root .sidebarContainer.hidden {
   transition: opacity 0.5s ease, z-index 0s ease 0.5s;
   opacity: 0;
-  z-index: 0;
+  z-index: -1;
 }
 #root .sidebarContainer .sidebarOverflow {
   position: fixed;
