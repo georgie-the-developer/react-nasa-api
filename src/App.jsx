@@ -64,10 +64,16 @@ export default function App() {
   useState(async () => {
     setIsLoading(true);
     let data = await getApodData();
+    let type = data.media_type;
+    let url = data.hdurl ?? data.url;
+    if (type == "video") {
+      url = data.url;
+    }
     setApodData((prevValues) => ({
       ...prevValues,
       date: data.date,
-      img: data.hdurl,
+      mediaType: data.media_type,
+      source: url,
       title: data.title,
       description: data.explanation,
     }));
@@ -87,7 +93,11 @@ export default function App() {
         <Loading />
       ) : (
         <>
-          <Main img={apodData.img} alt={apodData.alt} />
+          <Main
+            source={apodData.source}
+            mediaType={apodData.mediaType}
+            alt={apodData.alt}
+          />
           <Sidebar
             title={apodData.title}
             date={apodData.date}
