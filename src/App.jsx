@@ -22,14 +22,14 @@ export default function App() {
     let data = await response.json();
     return data;
   };
-  // get data either from url or sessionStorage cache
+  // get data either from url or localStorage cache
   const getApodData = async () => {
     try {
       let data;
       let cachedData =
-        JSON.parse(sessionStorage.getItem("savedApodData")) ?? false;
+        JSON.parse(localStorage.getItem("savedApodData")) ?? false;
       let cacheExpiry =
-        JSON.parse(sessionStorage.getItem("savedApodDataExpiry")) ?? 0;
+        JSON.parse(localStorage.getItem("savedApodDataExpiry")) ?? 0;
       let cacheExpired = Date.now() > cacheExpiry;
       console.log(Date.now(), cacheExpiry);
       if (cachedData && !cacheExpired) {
@@ -48,8 +48,8 @@ export default function App() {
   // cache data
   const cacheApodData = (data) => {
     const expiryDate = getNextDayStartUTCTimestamp();
-    sessionStorage.setItem("savedApodData", JSON.stringify(data));
-    sessionStorage.setItem("savedApodDataExpiry", expiryDate);
+    localStorage.setItem("savedApodData", JSON.stringify(data));
+    localStorage.setItem("savedApodDataExpiry", expiryDate);
   };
   // get the next day date
   function getNextDayStartUTCTimestamp() {
